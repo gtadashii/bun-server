@@ -1,6 +1,8 @@
+import swagger from "@elysiajs/swagger";
 import { Elysia, t } from "elysia";
 
 const app = new Elysia()
+  .use(swagger({ path: "/docs" }))
   .get("/", () => "Hello World")
   .get("/users", () => [{ id: 123, name: "John Doe" }])
   .get("/users/:id", ({ params }) => ({ id: params.id, name: "John Doe" }))
