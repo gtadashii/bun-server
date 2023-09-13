@@ -1,10 +1,15 @@
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 
 const app = new Elysia()
   .get("/", () => "Hello World")
   .get("/users", () => [{ id: 123, name: "John Doe" }])
   .get("/users/:id", ({ params }) => ({ id: params.id, name: "John Doe" }))
-  .post("/users", ({ body }) => body)
+  .post("/users", ({ body }) => body, {
+    body: t.Object({
+      name: t.String(),
+      age: t.Number(),
+    }),
+  })
   .listen(3000);
 
 console.log(
